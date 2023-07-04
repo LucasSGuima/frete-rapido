@@ -92,7 +92,7 @@ class QuoteControllerTest extends TestCase
         $offers = [
             [
                 'quotes_id' => $quote['id'],
-                'carrier_name' => 'Carrier 1',
+                'carrier_name' => 'carrier1',
                 'carrier_reference' => 'carrier1',
                 'service' => 'Service 1',
                 'final_price' => 100,
@@ -100,7 +100,7 @@ class QuoteControllerTest extends TestCase
             ],
             [
                 'quotes_id' => $quote['id'],
-                'carrier_name' => 'Carrier 1',
+                'carrier_name' => 'carrier1',
                 'carrier_reference' => 'carrier1',
                 'service' => 'Service 2',
                 'final_price' => 200,
@@ -108,7 +108,7 @@ class QuoteControllerTest extends TestCase
             ],
             [
                 'quotes_id' => $quote['id'],
-                'carrier_name' => 'Carrier 2',
+                'carrier_name' => 'carrier2',
                 'carrier_reference' => 'carrier2',
                 'service' => 'Service 1',
                 'final_price' => 150,
@@ -116,7 +116,7 @@ class QuoteControllerTest extends TestCase
             ],
             [
                 'quotes_id' => $quote['id'],
-                'carrier_name' => 'Carrier 2',
+                'carrier_name' => 'carrier2',
                 'carrier_reference' => 'carrier2',
                 'service' => 'Service 2',
                 'final_price' => 250,
@@ -124,7 +124,7 @@ class QuoteControllerTest extends TestCase
             ],
             [
                 'quotes_id' => $quote['id'],
-                'carrier_name' => 'Carrier 3',
+                'carrier_name' => 'carrier3',
                 'carrier_reference' => 'carrier3',
                 'service' => 'Service 1',
                 'final_price' => 300,
