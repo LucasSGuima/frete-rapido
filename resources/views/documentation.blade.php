@@ -71,6 +71,16 @@
                                                             Olá me chamo Lucas, e desenvolvi esse desafio solicitado pela Frete Rápido, segue uma mini documentação da aplicação. Ahh, você também pode deixar a página no <a href="?theme=dark">MODO ESCURO</a> ou
                                                             <a href="?theme=light">MODO CLARO</a>
                                                         </p>
+                                                        <p>
+                                                            Ah!! Importante dizer, deixei a API online temporariamente em meu website, esta em <a href="https://frete-rapido.lucassilvaguimaraes.com.br">https://frete-rapido.lucassilvaguimaraes.com.br/</a>.
+                                                        </p>
+                                                        <h3>
+                                                            Atenção!! A API online não esta gravando no banco de dados!!
+                                                        </h3>
+                                                        <p>
+                                                            Fiz várias  simulações em vários CEPS diferentes do estado de São Paulo. Ela irá consultar e retornar dados perfeitamente, porém não ira registrar no banco de dados.
+                                                            A operação GET será possiível graças os dados já registrados na simulação. <strong>A API local está persistindo os dados normalmente.</strong>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,16 +179,16 @@
                                                         <pre>composer install</pre>
 
                                                         <ol start="6">
-                                                            <li>Gere uma chave de criptografia para sua aplicação Laravel:</li>
-                                                        </ol>
-
-                                                        <pre>php artisan key:generate</pre>
-
-                                                        <ol start="7">
                                                             <li>Copie o arquivo de exemplo .env.example para .env:</li>
                                                         </ol>
 
                                                         <pre>cp .env.example .env</pre>
+
+                                                        <ol start="7">
+                                                            <li>Gere uma chave de criptografia para sua aplicação Laravel:</li>
+                                                        </ol>
+
+                                                        <pre>php artisan key:generate</pre>
 
                                                         <ol start="8">
                                                             <li>Abra o arquivo .env em um editor de texto e atualize as seguintes configurações:</li>
@@ -221,6 +231,14 @@
                                                             <hr>
 
                                                             <p>
+                                                                AGRUPAR_NOME sendo TRUE significa que o retorno pelo metodo get vai ser agrupado pelo nome e não o id unico de referencia, caso queria mudar para o agrupamento do id unico de referencia deixe FALSE
+                                                            </p>
+
+                                                            <pre>AGRUPAR_NOME=true</pre>
+
+                                                            <hr>
+
+                                                            <p>
                                                                 Ativação da verificação de CEP pela API do ViaCEP: Caso queira ativar a verificação de CEP pela API do ViaCEP, atualize a seguinte variável no arquivo .env:
                                                             </p>
 
@@ -237,7 +255,7 @@
                                                             <li>Agora com banco de dads ativo, rode as migrations com:</li>
                                                         </ol>
 
-                                                        <pre>./vendor/bin/sail artisan migrate || php artisan migrate</pre>
+                                                        <pre>./vendor/bin/sail artisan migrate ou php artisan migrate</pre>
 
                                                         <ol start="11">
                                                             <li>Após o Laravel Sail estar em execução, você pode acessar sua API em http://localhost.</li>
