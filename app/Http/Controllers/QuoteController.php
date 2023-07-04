@@ -128,18 +128,24 @@ class QuoteController extends Controller
 
         $metrics = [];
 
+        if(env('AGRUPAR_NOME')) {
+            $column_name = 'carrier_name';
+        } else {
+            $column_name = 'carrier_reference';
+        }
+
         // Quantidade de resultados por transportadora
-        $quoteCountByCarrier = $offers->groupBy('carrier_reference')->map->count();
+        $quoteCountByCarrier = $offers->groupBy($column_name)->map->count();
         $metrics['quote_count_by_carrier'] = $quoteCountByCarrier;
 
         // Total de "final_price" por transportadora (arredondado para 2 casas decimais)
-        $totalPriceByCarrier = $offers->groupBy('carrier_reference')->map(function ($offers) {
+        $totalPriceByCarrier = $offers->groupBy($column_name)->map(function ($offers) {
             return round($offers->sum('final_price'), 2);
         });
         $metrics['total_price_by_carrier'] = $totalPriceByCarrier;
 
         // Média de "final_price" por transportadora (arredondado para 2 casas decimais)
-        $averagePriceByCarrier = $offers->groupBy('carrier_reference')->map(function ($offers) {
+        $averagePriceByCarrier = $offers->groupBy($column_name)->map(function ($offers) {
             return round($offers->avg('final_price'), 2);
         });
         $metrics['average_price_by_carrier'] = $averagePriceByCarrier;
