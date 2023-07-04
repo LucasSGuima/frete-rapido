@@ -79,26 +79,34 @@ class QuoteController extends Controller
                 'zipcode_origin' => $result['dispatchers'][0]['zipcode_origin']
             ]);
 
-            foreach ($result['dispatchers'][0]['offers'] as $k => $offer) {
-                $offerData = [
-                    'quotes_id' => $quote['id'],
-                    'carrier_name' => $offer['carrier']['name'],
-                    'carrier_reference' => $offer['carrier']['reference'],
-                    'service' => $offer['service'],
-                    'final_price' => $offer['final_price'],
-                    'deadline' => $this->deadline($offer['delivery_time']),
-                ];
+            if(isset($result['dispatchers'][0]['offers'])) {
 
-                Offer::create($offerData);
+                foreach ($result['dispatchers'][0]['offers'] as $k => $offer) {
+                    $offerData = [
+                        'quotes_id' => $quote['id'],
+                        'carrier_name' => $offer['carrier']['name'],
+                        'carrier_reference' => $offer['carrier']['reference'],
+                        'service' => $offer['service'],
+                        'final_price' => $offer['final_price'],
+                        'deadline' => $this->deadline($offer['delivery_time']),
+                    ];
 
-                unset($offerData['quotes_id']);
-                unset($offerData['carrier_reference']);
-                $offers[] = $offerData;
+                    Offer::create($offerData);
+
+                    unset($offerData['quotes_id']);
+                    unset($offerData['carrier_reference']);
+                    $offers[] = $offerData;
+                }
+
+                return response()->json([
+                    'carrier' => $offers
+                ]);
+
+            } else {
+
+                return response(null, 204);
+
             }
-
-            return response()->json([
-                'carrier' => $offers
-            ]);
 
         } catch (RequestException $e) {
 
@@ -110,9 +118,13 @@ class QuoteController extends Controller
         }
     }
 
-    public function metrics($metric)
+    public function metrics($metric = null)
     {
-        $offers = Offer::latest()->take($metric)->get();
+        if($metric) {
+            $offers = Offer::latest()->take($metric)->get();
+        } else {
+            $offers = Offer::all();
+        }
 
         $metrics = [];
 
