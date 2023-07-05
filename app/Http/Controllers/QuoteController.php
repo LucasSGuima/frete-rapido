@@ -120,6 +120,10 @@ class QuoteController extends Controller
 
     public function metrics($metric = null)
     {
+        if ($metric && !is_numeric($metric)) {
+            return response()->json(['error' => 'O valor da métrica deve ser um número.'], 400);
+        }
+
         if($metric) {
             $offers = Offer::latest()->take($metric)->get();
         } else {
