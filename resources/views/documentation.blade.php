@@ -72,7 +72,7 @@
                                                             <a href="?theme=light">MODO CLARO</a>
                                                         </p>
                                                         <p>
-                                                            Ah!! Importante dizer, deixei a API online temporariamente em meu website, esta em <a href="https://frete-rapido.lucassilvaguimaraes.com.br">https://frete-rapido.lucassilvaguimaraes.com.br/</a>.
+                                                            Ah!! Importante dizer, deixei a API online temporariamente em meu website, esta em <a href="https://frete-rapido.lucassilvaguimaraes.com.br">https://frete-rapido.lucassilvaguimaraes.com.br/</a>, caso venha a testar por ela apenas troque localhost/api/ por https://frete-rapido.lucassilvaguimaraes.com.br/api/.
                                                         </p>
                                                         <h3>
                                                             Atenção!! A API online não esta gravando no banco de dados!!
@@ -80,6 +80,9 @@
                                                         <p>
                                                             Fiz várias  simulações em vários CEPS diferentes do estado de São Paulo. Ela irá consultar e retornar dados perfeitamente, porém não ira registrar no banco de dados.
                                                             A operação GET será possiível graças os dados já registrados na simulação. <strong>A API local está persistindo os dados normalmente.</strong>
+                                                        </p>
+                                                        <p>
+                                                            Em caso de correção ou contato, sinta-se avontade para entrar em contato comigo atraves do <a href="linkedin.com/in/lucas-guimarães-17077b21b">Linked In</a> recebi esse desafio atraves da <a href="linkedin.com/in/kerollyn-cristina-723148166">Kerollyn Cristina</a>
                                                         </p>
                                                     </div>
                                                 </div>

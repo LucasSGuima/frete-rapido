@@ -1,66 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# API Frete Rapido
 
-## About Laravel
+O desafio foi: Desenvolver uma API Rest para consultas externas e devolver apenas valores esperados.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Documentação da API
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+A aplicação possui uma mini documentação na rota web default. Ela está disponível temporariamente em https://frete-rapido.lucassilvaguimaraes.com.br/. Vale apena consultar, temos um passo a passo para instalação e uso!
 
-## Learning Laravel
+#### Detalhes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Método | Url               | Rota          | Descrição                                                     |
+| :----- | :----------       | :---------    | :----------------------------------                           |
+| POST   | `localhost/api/`  | `quote`       | Responsável por receber uma requisição de cotação de frete.   |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Espera-se receber um JSON de entrada conforme exemplo abaixo:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```http
+    {
+        "recipient":{
+            "address":{
+                "zipcode":"01311000"
+            }
+        },
+        "volumes":[
+            {
+                "category":7,
+                "amount":1,
+                "unitary_weight":5,
+                "price":349,
+                "sku":"abc-teste-123",
+                "height":0.2,
+                "width":0.2,
+                "length":0.2
+            },
+            {
+                "category":7,
+                "amount":2,
+                "unitary_weight":4,
+                "price":556,
+                "sku":"abc-teste-527",
+                "height":0.4,
+                "width":0.6,
+                "length":0.15
+            }
+        ]
+    }
+```
 
-## Laravel Sponsors
+#### Retorna um json semelhante
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```http
+    {
+        "carrier": [
+            {
+                "carrier_name": "UBER",
+                "service": "Normal",
+                "final_price": 60.74,
+                "deadline": 4
+            },
+            {
+                "carrier_name": "CORREIOS",
+                "service": "Normal",
+                "final_price": 78.03,
+                "deadline": 6
+            },
+            {
+                "carrier_name": "CORREIOS",
+                "service": "PAC",
+                "final_price": 92.45,
+                "deadline": 5
+            },
+            {
+                "carrier_name": "BTU BRASPRESS",
+                "service": "Normal",
+                "final_price": 103.35,
+                "deadline": 6
+            },
+            {
+                "carrier_name": "CORREIOS",
+                "service": "SEDEX",
+                "final_price": 162.68,
+                "deadline": 1
+            }
+        ]
+    }
+```
 
-### Premium Partners
+| Método    | Url                       | Rota       | Parâmetro                                                |
+| :-----    | :----------               | :--------- | :---------                                               |
+| Get       | `http://localhost/api/`   | `metrics/`| **Opcional**. (int) Numero de ofertas a ser consultadas  |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### Retorna um json semelhante
 
-## Contributing
+```http
+    {
+        "quote_count_by_carrier": {
+            "UBER": 1,
+            "CORREIOS": 3,
+            "BTU BRASPRESS": 1
+        },
+        "total_price_by_carrier": {
+            "UBER": 60.74,
+            "CORREIOS": 333.16,
+            "BTU BRASPRESS": 103.35
+        },
+        "average_price_by_carrier": {
+            "UBER": 60.74,
+            "CORREIOS": 111.05,
+            "BTU BRASPRESS": 103.35
+        },
+        "cheapest_freight": 60.74,
+        "expensive_freight": 162.68
+    }
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Referência
 
-## Code of Conduct
+ - [Documentação API Oficial Frete Rapido](https://dev.freterapido.com/ecommerce/)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+## Etiquetas
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Autores
+
+- [@LucasSGuima](https://www.github.com/LucasSGuima)
