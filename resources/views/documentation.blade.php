@@ -82,7 +82,7 @@
                                                             A operação GET será possiível graças os dados já registrados na simulação. <strong>A API local está persistindo os dados normalmente.</strong>
                                                         </p>
                                                         <p>
-                                                            Em caso de correção ou contato, sinta-se avontade para entrar em contato comigo atraves do <a href="linkedin.com/in/lucas-guimarães-17077b21b">Linked In</a> recebi esse desafio atraves da <a href="linkedin.com/in/kerollyn-cristina-723148166">Kerollyn Cristina</a>
+                                                            Em caso de correção ou contato, sinta-se avontade para entrar em contato comigo atraves do <a target="_blank" href="https://linkedin.com/in/lucas-guimarães-17077b21b">Linked In</a> recebi esse desafio atraves da <a target="_blank" href="https://linkedin.com/in/kerollyn-cristina-723148166">Kerollyn Cristina</a>
                                                         </p>
                                                     </div>
                                                 </div>
